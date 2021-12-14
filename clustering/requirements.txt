@@ -1,5 +1,5 @@
-allennlp==2.1.0
-allennlp-models==2.1.0
+# allennlp==2.1.0
+# allennlp-models==2.1.0
 argon2-cffi==21.1.0
 attrs==21.2.0
 backcall==0.2.0
@@ -60,7 +60,6 @@ pathy==0.6.0
 pexpect==4.8.0
 pickleshare==0.7.5
 Pillow==8.4.0
-pkg_resources==0.0.0
 pluggy==1.0.0
 preshed==3.0.5
 prometheus-client==0.12.0
@@ -105,7 +104,7 @@ torchvision==0.8.2
 tornado==6.1
 tqdm==4.62.3
 traitlets==5.1.1
-transformers==4.11.3
+transformers
 typer==0.3.2
 typing-extensions==3.10.0.2
 urllib3==1.26.7
