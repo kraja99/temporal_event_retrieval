@@ -272,23 +272,25 @@ if __name__ == "__main__":
     parser.add_argument("--corpus-save-path", required=False, type=str)
     parser.add_argument("--corpus-load-path", required=False, type=str)
     parser.add_argument("--anchor-event", required=False, type=str)
+    parser.add_argument("--debug", required=False, type=bool)
     args = parser.parse_args()
 
     # Get cpu or gpu device
     device = "cuda" if torch.cuda.is_available() else "cpu"
     print("Using {} device".format(device))
 
-    print("Loading Documents")
+    print("Loading Documents...")
     # news_prefixes = ['afp', 'apw', 'cna', 'ltw', 'nyt', 'wpb', 'xin']
     news_prefixes = ['ltw']
     doc_to_text = load_documents(news_prefixes, args.gigaword_root)
     print("Number of Documents", len(doc_to_text))
 
-    print("Loading Sentence Encoder")
+    print("Loading Sentence Encoder...")
     # model = SentenceTransformer('all-mpnet-base-v2')
     model = SentenceTransformer('all-MiniLM-L6-v2')
+    print("Loaded Sentence Encoder")
 
-    print("Generating Corpus")
+    print("Generating Corpus...")
     # corpus, corpusidx_to_doc = generate_corpus(doc_to_text)
     with open(os.path.join(args.corpus_load_path, 'ltw_corpus.pkl'), "rb") as corpus_file:
         corpus = pickle.load(corpus_file)
@@ -296,6 +298,7 @@ if __name__ == "__main__":
         corpusidx_to_doc = pickle.load(corpus_file)
     print("Corpus Size:", len(corpus), "sentences")
 
+    # Encode Corpus (and save embeddings for future use)
     if args.corpus_save_path:
         print(int((len(corpus)/5000000)) + 1, "Total Batch(es) - Can only enocde ~5M sentences at a time")
         for i in range(0, len(corpus), 5000000):
@@ -309,7 +312,7 @@ if __name__ == "__main__":
             corpus_output_dir = os.path.join(args.corpus_save_path)
             os.makedirs(corpus_output_dir, exist_ok=True)
             torch.save(corpus_embeddings, corpus_output_dir + "/ltw_f_corpus_emb" + str(int(i/5000000)) +".pt")
-    elif args.corpus_load_path:
+    elif args.corpus_load_path: # Use Existing Embeddings for Corpus
         # corpus_dir = os.path.join(args.corpus_load_path)
         # files = os.listdir(corpus_dir)
         # for f in files:

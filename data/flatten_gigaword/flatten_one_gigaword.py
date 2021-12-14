@@ -1,3 +1,5 @@
+# Adapted from https://github.com/nelson-liu/flatten_gigaword
+
 import logging
 import os
 import re
