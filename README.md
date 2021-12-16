@@ -17,7 +17,16 @@ pip install -r requirements.txt
 jupyter notebook --no-browser
 ```
 
-Running the notebook should be straightforward, however I'll include some examples of how to run the script below. Example outputs and further implementation details are available in the Project Overview linked above.
+<!-- Running the notebook should be straightforward, however I'll include some examples of how to run the script below. 
+
+```
+# Generate Embeddings
+
+# Load Embeddings
+
+``` -->
+
+Example outputs and further implementation details are available in the Project Overview linked above.
 
 The allennlp package used for SRL parsing uses an older version of transformers that conflicts with the sentence-transformers package. For now I've commented out the allennlp package from the requirements file, however you can install allennlp and its required transformers version after performing all the necessary encoding over the corpus you are clustering.
 
